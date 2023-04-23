@@ -25,7 +25,7 @@
                             <td>{{ (cit.cliente.identificacion) }}</td>
                             <td>{{ (cit.cliente.telefono) }}</td>
                             <td>{{ (cit.cliente.correo) }}</td>
-                            <td>{{ moment(cit.fechacita).format("DD/MM/YYYY hh:mm a") }}</td>
+                            <td><strong>{{ moment(cit.fechacita).format("DD/MM/YYYY hh:mm a") }}</strong></td>
 
 
                             <td>{{ cit.descripcion }}</td>
