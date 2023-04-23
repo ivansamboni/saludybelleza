@@ -27,18 +27,18 @@
           </div>
           <form @submit.prevent="buscarCliente()" class="d-flex">&nbsp;
             <input class="dropdown-toggle form-control" required name="bcedula" type="text" v-model="bcedula"
-              placeholder="Cedula">
-            <button class="myButton3" type="submit">
+              placeholder="Cedula">&nbsp;&nbsp;
+            <button class="btn btn-outline-primary" type="submit">
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </button>&nbsp;
           </form>
 
           <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="myButton3" data-bs-toggle="modal" data-bs-target="#regcliente"
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#regcliente"
               @click="modalnuevo()">+
               <font-awesome-icon icon="fa-solid fa-user" /> Nuevo
             </button>&nbsp;
-            <button type="button" class="myButton3" @click="btnporvencer()">
+            <button type="button" class="btn btn-outline-primary" @click="btnporvencer()">
               <font-awesome-icon icon="fa-solid fa-clock" /> Por vencer <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{ cantvencer }}
@@ -47,8 +47,6 @@
 
 
             </button>&nbsp;
-
-            <h3>{{ jsonmensaje }}</h3>
 
           </div>
 
@@ -95,7 +93,7 @@
             <div class="card mb-4" id="datosCliente" style="display:none;">
               <div class="card-body">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal"
+                  <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
                     data-bs-target="#regcliente">
                     <font-awesome-icon icon="fa-solid fa-pen-to-square" size="sm" /> Editar
                   </button>&nbsp;
@@ -104,7 +102,7 @@
                     <font-awesome-icon icon="fa-solid fa-right-to-bracket" /> Ingresa
                   </button>&nbsp;
 
-                  <button type="button" class="btn btn-outline-dark btn-sm" id="btnactivo" style="display:block;"
+                  <button type="button" class="btn btn-outline-success btn-sm" id="btnactivo" style="display:block;"
                     data-bs-toggle="modal" data-bs-target="#modmembresia">
                     <font-awesome-icon icon="fa-solid fa-check" />
                     Activar
@@ -380,14 +378,13 @@
         <div class="modal-body">
           <center>
             <label for="estadoactivo"><strong>Fecha Final</strong></label>&nbsp;
-            <input type="date" v-model="clientes.estadoactivo" name="estadoactivo" placeholder="Días" width="50%">
-            <br> <br>
-            <label for="precio"><strong>Precio de Venta</strong></label>&nbsp;
-            <input type="number" v-model="activacion.precio" name="precio" pattern="[0-9]"><br>
-
+            <input type="date" v-model="clientes.estadoactivo" name="estadoactivo" class="form-control" placeholder="Días" width="50%">
+        <br>
+            <label for="precio"><strong>Precio de Venta (Sin puntos)</strong></label>&nbsp;
+            <input type="number" v-model="activacion.precio" name="precio" class="form-control" pattern="[0-9]">
             <br>
             <label for="tipo"><strong>Descripción de Venta</strong></label>&nbsp;
-            <input type="text" v-model="activacion.tipoventa" name="tipo"><br>
+            <input type="text" v-model="activacion.tipoventa" name="tipo" class="form-control">
           </center>
           <br>
           <h3>Fecha de Vencimiento: <strong style="color:green;">{{
@@ -422,8 +419,8 @@ export default {
       cantvisita: '',
       cantvencer: '',
       jsonmensaje: '',
-    
-      activacion: { cliente_id: '', precio: '', tipoventa: '',  },
+
+      activacion: { cliente_id: '', precio: '', tipoventa: '', },
 
       clientes: {
         id: '', nombres: '', apellidos: '',
@@ -526,27 +523,27 @@ export default {
     },
 
     async crearCliente() {
-      
+
       axios.post('api/clientes', this.clientes)
         .then(function (response) {
-          alert('Cliente Creado con Éxito')          
+          alert('Cliente Creado con Éxito')
         })
         .catch(function (error) {
-          alert('los campos "Nombres, Apellidos y Cedula son Obligatorios"  o la identificación o el email ya están registrados' );
+          alert('los campos "Nombres, Apellidos y Cedula son Obligatorios"  o la identificación o el email ya están registrados');
         });
 
-    }, 
+    },
 
     async activarCliente() {
       let confirmac = confirm('Activar este cliente?');
       if (confirmac) {
-      this.clientes.notificado = 0;
-      axios.post('api/ventas', this.activacion);
-      axios.put('api/clientes/' + this.clientes.id, this.clientes);
-      axios.post('api/visita?cliente_id=' + this.clientes.id);
-      alert('Se Activó con éxito');
-      this.visitantes();
-      this.porvencer();
+        this.clientes.notificado = 0;
+        axios.post('api/ventas', this.activacion);
+        axios.put('api/clientes/' + this.clientes.id, this.clientes);
+        axios.post('api/visita?cliente_id=' + this.clientes.id);
+        alert('Se Activó con éxito');
+        this.visitantes();
+        this.porvencer();
       }
     },
 

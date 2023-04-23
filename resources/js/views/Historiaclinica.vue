@@ -1279,7 +1279,7 @@
             <label for="tipo"><strong>Descripción</strong></label>&nbsp;
             <input type="text" v-model="activacion.tipoventa" name="tipo"><br><br>
 
-            <label for="precio"><strong>Precio Venta</strong></label>&nbsp;
+            <label for="precio"><strong>Precio (Sin puntos)</strong></label>&nbsp;
             <input type="number" v-model="activacion.precio" name="precio" pattern="[0-9]"><br>
           </center>
           <br>

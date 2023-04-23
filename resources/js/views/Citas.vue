@@ -21,12 +21,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="        cit         in         citas        " :key=" cit.id ">
+                        <tr v-for="          cit           in           citas          " :key=" cit.id ">
                             <td>{{ cit.cliente.nombres }} {{ cit.cliente.apellidos }}</td>
                             <td>{{ (cit.cliente.identificacion) }}</td>
                             <td>{{ (cit.cliente.telefono) }}</td>
                             <td>{{ (cit.cliente.correo) }}</td>
-                            <td>{{ moment(cit.fechacita).format("DD/MM/YYYY hh:mm a") }}</td>
+                            <td><strong>{{ moment(cit.fechacita).format("DD/MM/YYYY hh:mm a") }}</strong></td>
 
 
                             <td>{{ cit.descripcion }}</td>
@@ -36,7 +36,6 @@
                         </tr><br>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
@@ -58,7 +57,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false"
                             placeholder="Apellidos,Nombres o Identificación..." />
                         <ul class="dropdown-menu">
-                            <tr v-for="        result         in         results        " :key=" result.id ">
+                            <tr v-for="          result           in           results          " :key=" result.id ">
                                 <a class="dropdown-item" href="#" @click=" buscarCliente(result.identificacion) ">{{
                                     result.nombres
                                     }} {{
@@ -126,18 +125,18 @@ export default {
 
         activarCita() {
             this.correo.fecha = this.clientecita.fechacita;
-            
+
             return axios.post('api/citas', this.clientecita).then(response => {
                 alert('Cita agendada con éxito');
                 axios.post('api/enviarcorreocita', this.correo);
                 this.listarCitas();
             })
-             .catch(error => {
-                alert('Parece que ya hay una cita para ese día y esa hora o el campo descripción está vacío');
-                });                
+                .catch(error => {
+                    alert('Parece que ya hay una cita para ese día y esa hora o el campo descripción está vacío');
+                });
         },
 
-       
+
 
 
 
