@@ -21,7 +21,7 @@ return new class extends Migration
                 ->on('clientes')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->date('fechacita')->unique();
+            $table->datetime('fechacita')->unique();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });
