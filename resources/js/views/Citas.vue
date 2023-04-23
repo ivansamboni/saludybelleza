@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="      cit       in       citas      " :key=" cit.id ">
+                        <tr v-for="        cit         in         citas        " :key=" cit.id ">
                             <td>{{ cit.cliente.nombres }} {{ cit.cliente.apellidos }}</td>
                             <td>{{ (cit.cliente.identificacion) }}</td>
                             <td>{{ (cit.cliente.telefono) }}</td>
@@ -58,7 +58,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false"
                             placeholder="Apellidos,Nombres o Identificación..." />
                         <ul class="dropdown-menu">
-                            <tr v-for="      result       in       results      " :key=" result.id ">
+                            <tr v-for="        result         in         results        " :key=" result.id ">
                                 <a class="dropdown-item" href="#" @click=" buscarCliente(result.identificacion) ">{{
                                     result.nombres
                                     }} {{
@@ -124,20 +124,24 @@ export default {
 
     methods: {
 
-        async activarCita() {
+        activarCita() {
             this.correo.fecha = this.clientecita.fechacita;
-            axios.post('api/enviarcorreocita', this.correo)
-            axios.post('api/citas', this.clientecita)
-                .then(function (response) {
-                    alert('Se agendó la cita y se envía correo de notificación');
-                })
-                .catch(function (error) {
-                    alert('Parece que ya hay una cita para ese dia y esa hora');
-                });
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                 this.listarCitas();
             
+            return axios.post('api/citas', this.clientecita).then(response => {
+                alert('Cita agendada con éxito');
+                axios.post('api/enviarcorreocita', this.correo);
+                this.listarCitas();
+            })
+             .catch(error => {
+                alert('Parece que ya hay una cita para ese día y esa hora');
+                });
+                
         },
+
+        //axios.post('api/enviarcorreocita', this.correo)
+
+
+
 
         async listarCitas() {
             const res = await axios.get('api/citas');
