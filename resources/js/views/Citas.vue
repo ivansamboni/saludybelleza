@@ -133,12 +133,11 @@ export default {
                 this.listarCitas();
             })
              .catch(error => {
-                alert('Parece que ya hay una cita para ese día y esa hora');
-                });
-                
+                alert('Parece que ya hay una cita para ese día y esa hora o el campo descripción está vacío');
+                });                
         },
 
-        //axios.post('api/enviarcorreocita', this.correo)
+       
 
 
 

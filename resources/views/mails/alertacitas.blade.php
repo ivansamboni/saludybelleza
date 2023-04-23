@@ -1,4 +1,6 @@
-
+@php
+    use Carbon\Carbon;
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -27,7 +29,7 @@
         <br><br>
         <p class="card-text text-center" >Hola <strong>{{$contenido['nombre']}}&nbsp;{{$contenido['apellido']}}</strong>
            desde nuestro centro de acondicionamiento físico ARMONIA,
-            SALUD Y BELLEZA te recordamos que la fecha de tu próxima cita será el <strong>{{$contenido['fecha']}}</strong><br>
+            SALUD Y BELLEZA te recordamos que la fecha de tu próxima cita será el <strong>{{\Carbon\Carbon::parse($contenido['fecha'])->format('d/m/Y h:i A')}}</strong><br>
             <br><br>
             <small>Más información Tel: 322 8122325</small>            
         
