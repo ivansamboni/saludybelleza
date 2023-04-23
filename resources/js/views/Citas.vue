@@ -4,7 +4,7 @@
             <div class="card-body">
                 <h5 class="text-center"><strong>Agendamiento de Citas</strong></h5>
 
-                <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#modcitas">Nueva Cita</button>
+                <button class="btn btn-outline-dark" @click="modalNuevo();" data-bs-toggle="modal" data-bs-target="#modcitas">Nueva Cita</button>
                 <br>
                 <table class="table">
                     <thead>
@@ -110,10 +110,10 @@ export default {
             apellidocliente: '',
             citas: [],
             results: [],
-        
+
         };
     },
-   
+
     mounted() {
         this.listarCitas();
         this.search();
@@ -128,12 +128,7 @@ export default {
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 await axios.post('api/enviarcorreocita', this.correo);
                 this.listarCitas();
-                this.nombrecliente = '';
-                this.apellidocliente = '';
-                this.clientecita.cliente_id = '';
-                this.clientecita.descripcion = '';
-                this.clientecita.fechacita = '';
-
+                this.modalNuevo();
             }
 
         },
@@ -169,7 +164,16 @@ export default {
             this.correo.nombre = res.data.nombres;
             this.correo.apellido = res.data.apellidos;
             this.correo.correo = res.data.correo;
-        }
+        },
+
+        modalNuevo() {
+            this.nombrecliente = '';
+            this.apellidocliente = '';
+            this.clientecita.cliente_id = '';
+            this.clientecita.descripcion = '';
+            this.clientecita.fechacita = '';
+            this.apellidocliente = '';
+        },
 
     }
 }
