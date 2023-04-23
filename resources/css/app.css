@@ -1,0 +1,167 @@
+#bodylogin{
+    background-image: url('img/logbac.jpg');
+    background-repeat:no-repeat ;
+    background-position: center;
+    background-size: cover;
+   }
+   .myButton {
+      
+       box-shadow:inset 0px -3px 7px 0px #29bbff;
+       background:linear-gradient(to bottom, #252b2e 5%, #2f6fa8 100%);
+       background-color:#252b2e;
+       border-radius:3px;
+       border:1px solid #0b0e07;
+       display:inline-block;
+       cursor:pointer;
+       color:#ffffff;
+       font-family:Arial;
+       font-size:10px;
+       padding:8px 10px;
+       text-decoration:none;
+       text-shadow:0px 1px 0px #263666;
+   }
+   .myButton:hover {
+       background:linear-gradient(to bottom, #2f6fa8 5%, #252b2e 100%);
+       background-color:#2f6fa8;
+   }
+   .myButton:active {
+       position:relative;
+       top:1px;
+   }
+   
+   .myButton2 {
+      
+       box-shadow:inset 0px -3px 7px 0px #dd2e2e;
+       background:linear-gradient(to bottom, #cf180b 5%, #b11c1c 100%);
+       background-color:#d81919;
+       border-radius:3px;
+       border:1px solid #0b0e07;
+       display:inline-block;
+       cursor:pointer;
+       color:#ffffff;
+       font-family:Arial;
+       font-size:10px;
+       padding:8px 10px;
+       text-decoration:none;
+       text-shadow:0px 1px 0px #ca1313;
+   }
+   .myButton2:hover {
+       background:linear-gradient(to bottom, #d1463c 5%, #c01205 100%);
+       background-color:#e74d42;
+   }
+   .myButton2:active {
+       position:relative;
+       top:1px;
+   }
+   
+   
+   .myButton3 {
+      
+       box-shadow:inset 0px -3px 7px 0px #29bbff;
+       background:linear-gradient(to bottom, #a3cce0 5%, #2f6fa8 100%);
+       background-color:#14c6dd;
+       border-radius:3px;
+       border:1px solid #0b0e07;
+       display:inline-block;
+       cursor:pointer;
+       color:#ffffff;
+       font-family:Arial;
+       font-size:15px;
+       padding:8px 10px;
+       text-decoration:none;
+       text-shadow:0px 1px 0px #263666;
+   }
+   .myButton3:hover {
+       background:linear-gradient(to bottom, #2f6fa8 5%, #252b2e 100%);
+       background-color:#2f6fa8;
+   }
+   .myButton3:active {
+       position:relative;
+       top:1px;
+   }
+   
+   .myButton3sm {
+      
+       box-shadow:inset 0px -3px 7px 0px #29bbff;
+       background:linear-gradient(to bottom, #a3cce0 5%, #2f6fa8 100%);
+       background-color:#14c6dd;
+       border-radius:3px;
+       border:1px solid #0b0e07;
+       display:inline-block;
+       cursor:pointer;
+       color:#ffffff;
+       font-family:Arial;
+       font-size:12px;
+       padding:8px 10px;
+       text-decoration:none;
+       text-shadow:0px 1px 0px #263666;
+   }
+   .myButton3sm:hover {
+       background:linear-gradient(to bottom, #2f6fa8 5%, #252b2e 100%);
+       background-color:#2f6fa8;
+   }
+   .myButton3sm:active {
+       position:relative;
+       top:1px;
+   }
+   
+   .inputfisio{
+       width: 70%;
+       
+   }
+   
+   .table { border-collapse:collapse; page-break-after:always }
+   .gridlines td { border:1px dotted black }
+   .gridlines th { border:1px dotted black }
+   .b { text-align:center }
+   .e { text-align:center }
+   .f { text-align:right }
+   .inlineStr { text-align:left }
+   .n { text-align:right }
+   .s { text-align:left }
+   td.style0 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+   th.style0 { vertical-align:bottom; border-bottom:none #000000; border-top:none #000000; border-left:none #000000; border-right:none #000000; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+   td.style1 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+   th.style1 { vertical-align:bottom; border-bottom:1px solid #000000 !important; border-top:1px solid #000000 !important; border-left:1px solid #000000 !important; border-right:1px solid #000000 !important; color:#000000; font-family:'Calibri'; font-size:11pt; background-color:white }
+   table.sheet0 col.col0 { width:42pt }
+   table.sheet0 col.col1 { width:42pt }
+   table.sheet0 col.col2 { width:42pt }
+   table.sheet0 col.col3 { width:42pt }
+   table.sheet0 col.col4 { width:42pt }
+   table.sheet0 col.col5 { width:42pt }
+   table.sheet0 col.col6 { width:42pt }
+   table.sheet0 tr { height:15pt }
+   
+   .progress-bar {
+       width: 700px;
+       height: 30px;
+     }
+     
+     .progress {
+       height: 100%;
+       background-image: linear-gradient(to right, 
+         #26B878 0%,
+         #FFFF00 30%,
+     #FFFF00 60%,
+         #FF0000 100%
+       );
+     }
+     
+     .letras {
+       list-style: none;
+       
+       padding: 0px;
+       margin: 0;
+       display: flex;
+     }
+     
+     .letras li {
+       margin-right: 96px;
+       
+       font-size: 15px;
+       font-weight: bold;
+     }
+    
+     input[type="radio"]:checked + label {
+       color: rgb(0, 47, 255);
+     }
