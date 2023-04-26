@@ -1,6 +1,5 @@
 <template>
-
- <div class="container" style="width:80%;">
+  <div class="container" style="width:80%;">
     <div class="card"><br>
       <h5 class="text-center"><strong>
           <font-awesome-icon icon="fa-solid fa-money-check-dollar" /> Ventas
@@ -13,7 +12,8 @@
         <label for="fecha2">Hasta</label>&nbsp;
         <input type="date" name="fecha2" v-model="fechas.fecha2">&nbsp;
         <button class="btn btn-success" @click="consultaVenta()">$ Consultar</button>&nbsp;
-        <button class="btn btn-success" @click="ventashoy()">Ventas de Hoy</button><br><br>
+        <button class="btn btn-success" @click="ventashoy()">Ventas de Hoy</button><br>
+        <br>
         <h3>Total: <string style="color:green;">${{ numberWithCommas(total) }}</string>
         </h3>&nbsp;
         <br><br>
@@ -44,11 +44,13 @@
 </template>
 
 <script>
+
 import moment from "moment";
 export default {
 
   data() {
     return {
+      name: '',
       moment: moment,
       total: 0,
       fechas: {
@@ -71,7 +73,7 @@ export default {
     numberWithCommas(x) {
       return x.toLocaleString();
     },
-
+   
     async ventashoy() {
       const res = await axios.get('api/ventas');
       this.ventas = res.data;

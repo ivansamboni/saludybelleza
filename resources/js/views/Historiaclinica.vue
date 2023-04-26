@@ -392,9 +392,10 @@
               <button class="myButton3" data-bs-toggle="modal" data-bs-target="#modalpago">+
                 Registrar
                 Pago</button>
-                <br>
               <br>
-              <h7>Total: <string style="color:green;">${{  numberWithCommas(total) }}</string></h7>
+              <br>
+              <h7>Total: <string style="color:green;">${{ numberWithCommas(total) }}</string>
+              </h7>
               <br>
               <table class="table">
                 <thead>
@@ -406,14 +407,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  
+
                   <tr v-for="ven in ventas" :key="ven.id">
                     <td>{{ ven.cliente.nombres }} {{ ven.cliente.apellidos }}</td>
-                    <td>${{  numberWithCommas(ven.precio) }}</td>
+                    <td>${{ numberWithCommas(ven.precio) }}</td>
                     <td>{{ ven.tipoventa }}</td>
                     <td>{{ moment(ven.created_at).format("DD/MM/YYYY hh:mm a") }}</td>
                   </tr><br>
-                  <h5>Total: <string style="color:green;">${{  numberWithCommas(total) }}</string>
+                  <h5>Total: <string style="color:green;">${{ numberWithCommas(total) }}</string>
                   </h5>&nbsp;
                 </tbody>
               </table>
@@ -1046,7 +1047,7 @@
               <label class="form-label" for="genero">Tratamiento Médico actual</label>
               <select v-model="clientes.tratamedicoactual" class="form-control form-control-sm">
                 <option value="No">No</option>
-                <option value="Si">Si</option> 
+                <option value="Si">Si</option>
               </select>
               <input type="text" v-model="clientes.tratamedicoactual" class="form-control form-control-sm"
                 placeholder="Especifique">
@@ -1279,12 +1280,12 @@
             <label for="tipo"><strong>Descripción</strong></label>&nbsp;
             <input type="text" v-model="activacion.tipoventa" name="tipo"><br><br>
 
-            <label for="precio"><strong>Precio Venta</strong></label>&nbsp;
+            <label for="precio"><strong>Precio (Sin puntos)</strong></label>&nbsp;
             <input type="number" v-model="activacion.precio" name="precio" pattern="[0-9]"><br>
           </center>
           <br>
 
-          <h3>Precio: <strong style="color:green;">${{  numberWithCommas(activacion.precio) }}</strong></h3>
+          <h3>Precio: <strong style="color:green;">${{ numberWithCommas(activacion.precio) }}</strong></h3>
         </div>
 
         <div class="modal-footer">
@@ -1416,7 +1417,6 @@
                     <th scope="col">Interna</th>
                     <th scope="col">Flexión</th>
                     <th scope="col">Ext</th>
-
                   </tr>
                 </thead>
                 <tbody>
@@ -2134,58 +2134,25 @@
 </template>
 
 <script>
-import Cardingreso from '../components/Cardingreso.vue';
+import { modalnuevo, modalnuevofisio, crearCliente, getEdad, numberWithCommas } from '../helpers/Functions.js'
+import { clientes, clifisio, activacion, anexo, otroregcliente } from '../helpers/objects.js'
 import moment from "moment";
 export default {
-  components: {
-    Cardingreso
-  },
 
   created() {
     this.search();
   },
   data() {
     return {
+      clientes,
+      clifisio,
+      activacion,
+      anexo,
+      otroregcliente,
       moment: moment,
       minLength: 3,
       bcedula: '',
-      clientes: {
-        id: '', nombres: '', apellidos: '',
-        tipodocumento: '', identificacion: '', genero: '', estadocivil: '',
-        nacimiento: '', edad: '', direccion: '', telefono: '', ocupacion: '', otrotelefono: '', correo: '', observacion: '', estadoactivo: '', created_at: '',
-        altura: '', peso: '', signofc: '', signofr: '', signopasistolica: '', signopadiastolica: '', diabetes: '', alergia: '', hta: '', cancer: '', transfusiones: '',
-        enfreumaticas: '', encames: '', accidentes: '', cardiopatias: '', cirugias: '', anteceotros: '', fdiabetes: '', falergia: '',
-        fhta: '', fcancer: '', ftransfusiones: '', fenfreumaticas: '', fencames: '', faccidentes: '', fcardiopatias: '',
-        espasmoscm: '', marchalibre: '', marchaclaudicante: '', marchaayuda: '', marchaespasticas: '',
-        marchaataxica: '', marchaotros: '', escaladolor: '',
-        fcirugias: '', fanteceotros: '', antfarmacologicos: '', antalergicos: '', antquirurgicos: '', tratamedicoactual: '', cicaquirurgica: '', estparaclinicos: '',
-        diagmedico: '', seevidencia: '', created_at: ''
-      },
-      clifisio: {
-        cliente_id: '', hombroflexion: '', hombroextencion: '', hombroabd: '', hombroadd: '',
-        rotaexterna: '', rotainterna: '', codoflexion: '', codoextencion: '', antbrazoexterna: '', antbrazointerna: '',
-        desviacionflexion: '', desviacionexterna: '',
-
-        palmar: '', dorsal: '', indicemcf: '', indiceifp: '', indiceifd: '', indiceabd: '', mediomcf: '', medioifp: '',
-        medioifd: '', medioabd: '', anularmcf: '', anularifp: '', anularifd: '', anularabd: '', meniquemcf: '',
-        meniqueifp: '', meniqueifd: '', meniqueabd: '', pulgarmcf: '', pulgarifp: '', pulgarifd: '', pulgarabd: '',
-
-        flxcadera: '', extcadera: '', rodillaflex: '', rodillaext: '',
-        caderaabd: '', caderaadd: '', flexplant: '', flexdors: '', rotatobiext: '', rotatobiint: '', tobilloinv: '', tobilloeve: '', created_at: ''
-      },
-
       registro: false,
-
-      activacion: { cliente_id: '', precio: '', tipoventa: '' },
-
-      anexo: {
-        cliente_id: '', descripcion: '', rutaarchivo: '', created_at: ''
-      },
-
-      otroregcliente: {
-        cliente_id: '', titulo: '', comentario: '', escalaregistro: '', created_at: ''
-      },
-
       results: [],
       otrosregistros: [],
       registros: [],
@@ -2204,34 +2171,12 @@ export default {
     }
   },
 
-  created() {
-
-  },
-
   methods: {
-    numberWithCommas(x) {
-      return x.toLocaleString();
-    },
-
-    getEdad(dateString) {
-
-      let hoy = new Date()
-      let fechaNacimiento = new Date(dateString)
-      let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
-      let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
-      if (
-        diferenciaMeses < 0 ||
-        (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
-      ) {
-        edad--
-      }
-
-      this.clientes.edad = edad;
-      return edad
-
-
-    },
-
+    modalnuevo,
+    modalnuevofisio,
+    getEdad,
+    numberWithCommas,
+    crearCliente,
 
     onFileChange(e) {
       this.anexo.rutaarchivo = e.target.files[0].name;
@@ -2239,7 +2184,7 @@ export default {
       this.file = e.target.files[0];
     },
 
-  async  submitForm() {
+    async submitForm() {
 
       let form = new FormData();
       form.append('file', this.file)
@@ -2255,10 +2200,10 @@ export default {
       this.anexo.rutaarchivo = null;
       this.filename = null;
       this.file = null;
-     
+
     },
 
-  async  crearregistro() {
+    async crearregistro() {
       axios.post('/api/otroregistro', this.otroregcliente).catch(function (error) {
         if (error.response) {
           alert('Debe poner una titulo y un comentario o resumen');
@@ -2269,139 +2214,7 @@ export default {
       this.otroregcliente.titulo = '';
       this.otroregcliente.comentario = '';
       this.otroregcliente.escalaregistro = '';
-      
 
-
-    },
-
-    modalnuevo() {
-
-      btnactcliente.hidden = true;
-      btncrecliente.hidden = false;
-      datosCliente.style.display = 'none';
-      perfilcliente.style.display = 'none';
-      this.clientes.nombres = '';
-      this.clientes.apellidos = '';
-      this.clientes.estadoactivo = '';
-      this.clientes.tipodocumento = 'CC';
-      this.clientes.identificacion = '';
-      this.clientes.genero = '';
-      this.clientes.estadocivil = '';
-      this.clientes.nacimiento = '';
-      this.clientes.edad = '';
-      this.clientes.direccion = '';
-      this.clientes.telefono = '';
-      this.clientes.otrotelefono = '';
-      this.clientes.correo = '';
-      this.clientes.ocupacion = '';
-      this.clientes.altura = '';
-      this.clientes.peso = '';
-      this.clientes.signofc = '';
-      this.clientes.signofr = '';
-      this.clientes.signopasistolica = '';
-      this.clientes.signopadiastolica = '';
-      this.clientes.diabetes = '';
-      this.clientes.alergia = '';
-      this.clientes.hta = '';
-      this.clientes.cancer = '';
-      this.clientes.transfusiones = '';
-      this.clientes.enfreumaticas = '';
-      this.clientes.encames = '';
-      this.clientes.accidentes = '';
-      this.clientes.cardiopatias = '';
-      this.clientes.cirugias = '';
-      this.clientes.fdiabetes = '';
-      this.clientes.falergia = '';
-      this.clientes.fhta = '';
-      this.clientes.fcancer = '';
-      this.clientes.ftransfusiones = '';
-      this.clientes.fenfreumaticas = '';
-      this.clientes.fencames = '';
-      this.clientes.faccidentes = '';
-      this.clientes.fcardiopatias = '';
-      this.clientes.fcirugias = '';
-      this.clientes.anteceotros = '';
-      this.clientes.fanteceotros = '';
-      this.clientes.antfarmacologicos = '';
-      this.clientes.antalergicos = '';
-      this.clientes.antquirurgicos = '';
-      this.clientes.tratamedicoactual = '';
-      this.clientes.diagmedico = '';
-      this.clientes.tratamedicoactual = '';
-      this.clientes.cicaquirurgica = '';
-      this.clientes.marchalibre = '';
-      this.clientes.marchaclaudicante = '';
-      this.clientes.marchaayuda = '';
-      this.clientes.marchaespasticas = '';
-      this.clientes.marchaataxica = '';
-      this.clientes.marchaotros = '';
-      this.clientes.escaladolor = '';
-      this.clientes.estparaclinicos = '';
-      this.clientes.seevidencia = '';
-
-
-
-
-    },
-    modalnuevofisio() {
-      this.clifisio.hombroflexion = '';
-      this.clifisio.hombroextencion = '';
-      this.clifisio.hombroabd = '';
-      this.clifisio.hombroadd = '';
-      this.clifisio.rotaexterna = '';
-      this.clifisio.rotainterna = '';
-      this.clifisio.codoflexion = '';
-      this.clifisio.codoextencion = '';
-      this.clifisio.antbrazoexterna = '';
-      this.clifisio.antbrazointerna = '';
-      this.clifisio.desviacionflexion = '';
-      this.clifisio.desviacionexterna = '';
-      this.clifisio.palmar = '';
-      this.clifisio.dorsal = '';
-      this.clifisio.indicemcf = '';
-      this.clifisio.indiceifp = '';
-      this.clifisio.indiceifd = '';
-      this.clifisio.indiceabd = '';
-      this.clifisio.mediomcf = '';
-      this.clifisio.medioifp = '';
-      this.clifisio.medioifd = '';
-      this.clifisio.medioabd = '';
-      this.clifisio.anularmcf = '';
-      this.clifisio.anularifp = '';
-      this.clifisio.anularifd = '';
-      this.clifisio.anularabd = '';
-      this.clifisio.meniquemcf = '';
-      this.clifisio.meniqueifp = '';
-      this.clifisio.meniqueifd = '';
-      this.clifisio.meniqueabd = '';
-      this.clifisio.pulgarmcf = '';
-      this.clifisio.pulgarifp = '';
-      this.clifisio.pulgarifd = '';
-      this.clifisio.pulgarabd = '';
-      this.clifisio.flxcadera = '';
-      this.clifisio.extcadera = '';
-      this.clifisio.rodillaflex = '';
-      this.clifisio.rodillaext = '';
-      this.clifisio.caderaabd = '';
-      this.clifisio.caderaadd = '';
-      this.clifisio.flexplant = '';
-      this.clifisio.flexdors = '';
-      this.clifisio.rotatobiext = '';
-      this.clifisio.rotatobiint = '';
-      this.clifisio.tobilloinv = '';
-      this.clifisio.tobilloeve = '';
-    },
-
-    
-
-    async crearCliente() {
-      axios.post('api/clientes', this.clientes)
-        .then(function (response) {         
-      alert('Cliente Creado con Éxito');    
-        })
-        .catch(function (error) {
-          alert('los campos "Nombres, Apellidos y Cedula son Obligatorios"  o la identificación o el email ya están registrados' );
-        });
     },
 
     async search() {
@@ -2487,10 +2300,8 @@ export default {
       this.clientes.estparaclinicos = res.data.estparaclinicos;
       this.clientes.seevidencia = res.data.seevidencia;
       this.clientes.created_at = res.data.created_at;
-
       this.bcedula = '';
       this.apellido = '';
-
       let hoy = new Date()
       let fechaNacimiento = new Date(res.data.nacimiento)
       let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
@@ -2500,12 +2311,10 @@ export default {
         (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
       ) {
         edad--
-
       }
       this.clientes.edad = edad;
       axios.put('api/clientes/' + this.clientes.id, this.clientes);
       return edad
-
     },
 
     async registrocliente(id) {
@@ -2522,7 +2331,6 @@ export default {
     },
 
     async fisiocliente(id) {
-
       const res = await axios.get('api/fisioterapia/' + id);
       this.registros = res.data;
       datosCliente.style.display = 'none';
@@ -2530,9 +2338,6 @@ export default {
       cardanexos.style.display = 'none';
       cardpagos.style.display = 'none';
       registrosfisio.style.display = 'block';
-
-
-
     },
 
     async anexocliente(id) {
@@ -2546,7 +2351,6 @@ export default {
       cardanexos.style.display = 'block';
 
     },
-
 
     async registrofisioterapia(id) {
       const res = await axios.get('api/fisioregistro/' + id);
@@ -2613,7 +2417,7 @@ export default {
           toast.style.display = 'none';
         }, 3000);
         this.registrocliente(this.clientes.id);
-      } 
+      }
 
     },
 
@@ -2626,22 +2430,20 @@ export default {
 
     },
 
-
-
     async anexoEliminar(id) {
 
       let confirmac = confirm('Eliminar este registro?');
       if (confirmac) {
         axios.delete('api/anexos/' + id);
-        
+
       }
       this.anexocliente(this.clientes.id);
     },
 
-  async  guardarfisioregistro() {
+    async guardarfisioregistro() {
       axios.post('api/fisioterapia', this.clifisio);
       await new Promise(resolve => setTimeout(resolve, 1000));
-     
+
       this.fisiocliente(this.clientes.id);
       this.modalnuevofisio();
     },
@@ -2651,7 +2453,7 @@ export default {
       this.verpagos(this.clientes.id);
       this.activacion.precio = '';
       this.activacion.tipoventa = '';
-      
+
     },
 
     async verpagos(id) {
