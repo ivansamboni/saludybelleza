@@ -1417,7 +1417,6 @@
                     <th scope="col">Interna</th>
                     <th scope="col">Flexión</th>
                     <th scope="col">Ext</th>
-
                   </tr>
                 </thead>
                 <tbody>
@@ -2135,7 +2134,8 @@
 </template>
 
 <script>
-import { modalnuevo,modalnuevofisio,crearCliente,getEdad,numberWithCommas } from '../helpers/Functions.js'
+import { modalnuevo, modalnuevofisio, crearCliente, getEdad, numberWithCommas } from '../helpers/Functions.js'
+import { clientes, clifisio, activacion, anexo, otroregcliente } from '../helpers/objects.js'
 import moment from "moment";
 export default {
 
@@ -2144,46 +2144,15 @@ export default {
   },
   data() {
     return {
+      clientes,
+      clifisio,
+      activacion,
+      anexo,
+      otroregcliente,
       moment: moment,
       minLength: 3,
       bcedula: '',
-      clientes: {
-        id: '', nombres: '', apellidos: '',
-        tipodocumento: '', identificacion: '', genero: '', estadocivil: '',
-        nacimiento: '', edad: '', direccion: '', telefono: '', ocupacion: '', otrotelefono: '', correo: '', observacion: '', estadoactivo: '', created_at: '',
-        altura: '', peso: '', signofc: '', signofr: '', signopasistolica: '', signopadiastolica: '', diabetes: '', alergia: '', hta: '', cancer: '', transfusiones: '',
-        enfreumaticas: '', encames: '', accidentes: '', cardiopatias: '', cirugias: '', anteceotros: '', fdiabetes: '', falergia: '',
-        fhta: '', fcancer: '', ftransfusiones: '', fenfreumaticas: '', fencames: '', faccidentes: '', fcardiopatias: '',
-        espasmoscm: '', marchalibre: '', marchaclaudicante: '', marchaayuda: '', marchaespasticas: '',
-        marchaataxica: '', marchaotros: '', escaladolor: '',
-        fcirugias: '', fanteceotros: '', antfarmacologicos: '', antalergicos: '', antquirurgicos: '', tratamedicoactual: '', cicaquirurgica: '', estparaclinicos: '',
-        diagmedico: '', seevidencia: '', created_at: ''
-      },
-      clifisio: {
-        cliente_id: '', hombroflexion: '', hombroextencion: '', hombroabd: '', hombroadd: '',
-        rotaexterna: '', rotainterna: '', codoflexion: '', codoextencion: '', antbrazoexterna: '', antbrazointerna: '',
-        desviacionflexion: '', desviacionexterna: '',
-
-        palmar: '', dorsal: '', indicemcf: '', indiceifp: '', indiceifd: '', indiceabd: '', mediomcf: '', medioifp: '',
-        medioifd: '', medioabd: '', anularmcf: '', anularifp: '', anularifd: '', anularabd: '', meniquemcf: '',
-        meniqueifp: '', meniqueifd: '', meniqueabd: '', pulgarmcf: '', pulgarifp: '', pulgarifd: '', pulgarabd: '',
-
-        flxcadera: '', extcadera: '', rodillaflex: '', rodillaext: '',
-        caderaabd: '', caderaadd: '', flexplant: '', flexdors: '', rotatobiext: '', rotatobiint: '', tobilloinv: '', tobilloeve: '', created_at: ''
-      },
-
       registro: false,
-
-      activacion: { cliente_id: '', precio: '', tipoventa: '' },
-
-      anexo: {
-        cliente_id: '', descripcion: '', rutaarchivo: '', created_at: ''
-      },
-
-      otroregcliente: {
-        cliente_id: '', titulo: '', comentario: '', escalaregistro: '', created_at: ''
-      },
-
       results: [],
       otrosregistros: [],
       registros: [],
@@ -2202,17 +2171,13 @@ export default {
     }
   },
 
-  created() {
-
-  },
-
   methods: {
     modalnuevo,
     modalnuevofisio,
     getEdad,
     numberWithCommas,
     crearCliente,
-    
+
     onFileChange(e) {
       this.anexo.rutaarchivo = e.target.files[0].name;
       this.filename = "Selected File: " + e.target.files[0].name;
@@ -2251,7 +2216,7 @@ export default {
       this.otroregcliente.escalaregistro = '';
 
     },
- 
+
     async search() {
 
       if (this.apellido.length >= 3) {
@@ -2386,7 +2351,6 @@ export default {
       cardanexos.style.display = 'block';
 
     },
-
 
     async registrofisioterapia(id) {
       const res = await axios.get('api/fisioregistro/' + id);
