@@ -23,32 +23,34 @@
                 </tr>
               </ul>
             </div>
-
           </div>
-          <form @submit.prevent="buscarCliente()" class="d-flex">&nbsp;
-            <input class="dropdown-toggle form-control" required name="bcedula" type="text" v-model="bcedula"
-              placeholder="Cedula">&nbsp;&nbsp;
-            <button class="btn btn-outline-primary" type="submit">
-              <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-            </button>&nbsp;
-          </form>
 
-          <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#regcliente"
-              @click="modalnuevo()">+
-              <font-awesome-icon icon="fa-solid fa-user" /> Nuevo
-            </button>&nbsp;
-            <button type="button" class="btn btn-outline-primary" @click="btnporvencer()">
-              <font-awesome-icon icon="fa-solid fa-clock" /> Por vencer <span
-                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {{ cantvencer }}
-                <span class="visually-hidden">unread messages</span>
-              </span>
+          
+
+            <form @submit.prevent="buscarCliente()" class="d-flex">&nbsp;
+              <input class="dropdown-toggle form-control" required name="bcedula" type="text" v-model="bcedula"
+                placeholder="Cedula">&nbsp;&nbsp;
+              <button class="btn btn-outline-primary" type="submit">
+                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+              </button>&nbsp;
+            </form>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#regcliente"
+                @click="modalnuevo()">+
+                <font-awesome-icon icon="fa-solid fa-user" /> Nuevo
+              </button>&nbsp;
+              <button type="button" class="btn btn-outline-primary" @click="btnporvencer()">
+                <font-awesome-icon icon="fa-solid fa-clock" /> Por vencer <span
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ cantvencer }}
+                  <span class="visually-hidden">unread messages</span>
+                </span>
 
 
-            </button>&nbsp;
+              </button>&nbsp;
 
-          </div>
+            </div>
 
         </ul>
 
@@ -83,7 +85,7 @@
 
     </div>
 
-
+    
     <!--Tarjeta información perfil -->
     <div class="col-sm-8">
       <form>
@@ -378,8 +380,9 @@
         <div class="modal-body">
           <center>
             <label for="estadoactivo"><strong>Fecha Final</strong></label>&nbsp;
-            <input type="date" v-model="clientes.estadoactivo" name="estadoactivo" class="form-control" placeholder="Días" width="50%">
-        <br>
+            <input type="date" v-model="clientes.estadoactivo" name="estadoactivo" class="form-control" placeholder="Días"
+              width="50%">
+            <br>
             <label for="precio"><strong>Precio de Venta (Sin puntos)</strong></label>&nbsp;
             <input type="number" v-model="activacion.precio" name="precio" class="form-control" pattern="[0-9]">
             <br>
@@ -405,6 +408,7 @@
 </template>
 
 <script>
+import {crearCliente,numberWithCommas,getEdad} from '../helpers/Functions.js'
 import moment from "moment";
 export default {
 
@@ -455,24 +459,10 @@ export default {
     this.porvencer();
   },
 
-  methods: {
-    numberWithCommas(x) {
-      return x.toLocaleString();
-    },
-    getEdad(dateString) {
-      let hoy = new Date()
-      let fechaNacimiento = new Date(dateString)
-      let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
-      let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
-      if (
-        diferenciaMeses < 0 ||
-        (diferenciaMeses === 0 && hoy.getDate() < fechaNacimiento.getDate())
-      ) {
-        edad--
-      }
-      this.clientes.edad = edad;
-      return edad
-    },
+  methods: {    
+    crearCliente,
+    numberWithCommas,
+    getEdad,
 
     async porvencer() {
       const res = await axios.get('api/clientes');
@@ -522,18 +512,7 @@ export default {
 
     },
 
-    async crearCliente() {
-
-      axios.post('api/clientes', this.clientes)
-        .then(function (response) {
-          alert('Cliente Creado con Éxito')
-        })
-        .catch(function (error) {
-          alert('los campos "Nombres, Apellidos y Cedula son Obligatorios"  o la identificación o el email ya están registrados');
-        });
-
-    },
-
+    
     async activarCliente() {
       let confirmac = confirm('Activar este cliente?');
       if (confirmac) {

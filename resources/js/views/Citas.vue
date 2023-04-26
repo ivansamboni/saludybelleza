@@ -136,11 +136,6 @@ export default {
                 });
         },
 
-
-
-
-
-
         async listarCitas() {
             const res = await axios.get('api/citas');
             this.citas = res.data;
