@@ -529,8 +529,7 @@ export default {
     async actualizarCliente() {
       const res = await axios.put('api/clientes/' + this.clientes.id, this.clientes);
       alert('Se actualizó con éxito');
-      this.btnporvencer();
-    },
+     },
 
     async eliminarCliente(id) {
       let confirmac = confirm('Eliminar este cliente?');
