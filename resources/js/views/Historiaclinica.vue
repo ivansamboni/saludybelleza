@@ -60,7 +60,7 @@
                 <font-awesome-icon icon="fa-solid fa-folder" size="1x" /> Ingreso
               </button>
               <button type="button" @click="registrocliente(clientes.id)" class="list-group-item list-group-item-action">
-                <font-awesome-icon icon="fa-solid fa-folder" size="1x" /> Otros Registros
+                <font-awesome-icon icon="fa-solid fa-folder" size="1x" /> Evolución
               </button>
 
               <button type="button" @click="fisiocliente(clientes.id)" class="list-group-item list-group-item-action">
@@ -95,16 +95,13 @@
                 </button>
 
               </div><br><br>
-              <h5 align="center">Historia Clínica Ingreso</h5>
+              <h3 class="text-center"><strong>Historia Clinica Ingreso</strong></h3>
               <h7 align="left">Fecha de registro {{ moment(clientes.created_at).format("DD/MM/YYYY") }}</h7><br><br>
-
               <br>
               <table class="table">
                 <tbody>
                   <tr>
-
                     <td><strong>Nombres:</strong><br> {{ clientes.nombres }}</td>
-
                     <td><strong>Apellidos:</strong><br> {{ clientes.apellidos }}</td>
                     <td><strong>Tipo ID:</strong><br> {{ clientes.tipodocumento }}</td>
                     <td><strong>#Identificación:</strong><br> {{ clientes.identificacion }}</td>
@@ -144,7 +141,7 @@
                 </tbody>
               </table>
               <br>
-              <h7 align="center"><strong>Antecedentes Personales</strong></h7>
+              <h3 class="text-center"><strong>Antecedentes Personales</strong></h3><br>
               <table class="table">
                 <tbody>
                   <tr>
@@ -154,17 +151,22 @@
                     <td><strong>Cáncer:</strong><br> {{ clientes.cancer }}</td>
                     <td><strong>Transfusiones:</strong><br> {{ clientes.transfusiones }}</td>
                     <td><strong>Enf. Reumáticas:</strong><br> {{ clientes.enfreumaticas }}</td>
+                  </tr>
+                  <tr>
                     <td><strong>Encames:</strong><br> {{ clientes.encames }}</td>
                     <td><strong>Accidentes:</strong><br> {{ clientes.accidentes }}</td>
                     <td><strong>Cardiopatías:</strong><br> {{ clientes.cardiopatias }}</td>
                     <td><strong>Cirugías:</strong><br> {{ clientes.cirugias }}</td>
-                    <td><strong>Otros:</strong><br> {{ clientes.anteceotros }}</td>
+                    <td><strong>Cicatríz Quirúrgica:</strong><br> {{ clientes.cicaquirurgica }}</td>
+                    <td><strong>Tratamiento Médico actual:</strong><br> {{ clientes.tratamedicoactual }}</td>
+                    <td><strong>Otros:</strong><br> {{ clientes.anteceotros }}</td>                    
+                  </tr>
+                </tbody>
+              </table><br>
 
-
-
-                  </tr><br>
-
-                  <h7 align="center"><strong>Antecedentes Familiares</strong></h7>
+              <h3 class="text-center"><strong>Antecedentes Familiares</strong></h3><br>
+              <table class="table">
+                <tbody>
                   <tr>
                     <td><strong>Diabetes:</strong><br> {{ clientes.fdiabetes }}</td>
                     <td><strong>Alergia:</strong><br> {{ clientes.falergia }}</td>
@@ -172,21 +174,24 @@
                     <td><strong>Cáncer:</strong><br> {{ clientes.fcancer }}</td>
                     <td><strong>Transfusiones:</strong><br> {{ clientes.ftransfusiones }}</td>
                     <td><strong>Enf. Reumáticas:</strong><br> {{ clientes.fenfreumaticas }}</td>
+                  </tr>
+                  <tr>
                     <td><strong>Encames:</strong><br> {{ clientes.fencames }}</td>
                     <td><strong>Accidentes:</strong><br> {{ clientes.faccidentes }}</td>
                     <td><strong>Cardiopatías:</strong><br> {{ clientes.fcardiopatias }}</td>
                     <td><strong>Cirugías:</strong><br> {{ clientes.fcirugias }}</td>
                     <td><strong>Otros:</strong><br> {{ clientes.fanteceotros }}</td>
                   </tr>
-
-                  <br>
-
+                </tbody>
+              </table>
+              <br>
+              <table class="table">
+                <tbody>
                   <tr>
                     <td><strong>Antecedentes Farmacológicos:</strong><br>{{ clientes.antfarmacologicos }}</td>
                     <td><strong>Antecedentes Alergicos:</strong><br> {{ clientes.antalergicos }}</td>
                     <td><strong>Antecedentes Quirúrgicos:</strong><br> {{ clientes.antquirurgicos }}</td>
-                    <td><strong>Tratamiento Médico actual:</strong><br> {{ clientes.tratamedicoactual }}</td>
-                    <td><strong>Cicatríz Quirúrgica:</strong><br> {{ clientes.cicaquirurgica }}</td>
+                                        
                     <td>
                       <h7 align="center"><strong>Marcha / Deambulación</strong></h7>
                     </td>
@@ -198,19 +203,12 @@
                     <td><strong>Otros:</strong><br> {{ clientes.marchaotros }}</td>
 
                   </tr><br>
-
-
-
                   <td>
                     <h7 align="center"><strong>Estudios Paraclínicos</strong></h7>
                   </td>
 
                   <td><strong>Tipo de Estudio</strong> {{ clientes.estparaclinicos }}</td>
-
-
-
                 </tbody>
-
               </table>
               <div align="center">
                 <div class="container" style="width:80%;margin-left:160px;">
@@ -646,7 +644,9 @@
               <!-- Name input -->
               <div class="form-outline">
                 <label class="form-label" for="nombre">Nombres</label>
-                <input type="text" v-model="clientes.nombres" class="form-control form-control-sm" id="nombre" />
+                <spam style="color:red;">(*)</spam>
+                <input type="text" v-model="clientes.nombres" class="form-control form-control-sm" id="nombre"
+                  placeholder="Campo obligatorio" />
 
               </div>
             </div>
@@ -654,7 +654,9 @@
               <!-- Name input -->
               <div class="form-outline">
                 <label class="form-label" for="nombre">Apellidos</label>
-                <input type="text" v-model="clientes.apellidos" class="form-control form-control-sm" id="nombre" />
+                <spam style="color:red;">(*)</spam>
+                <input type="text" v-model="clientes.apellidos" class="form-control form-control-sm" id="nombre"
+                  placeholder="Campo obligatorio" />
 
               </div>
             </div>
@@ -669,14 +671,12 @@
                 <option value="CE">CE</option>
               </select>
             </div>
-
-
-
             <div class="col-sm-2">
               <div class="form-outline">
                 <label class="form-label" required for="identificacion">#Identificación</label>
+                <spam style="color:red;">(*)</spam>
                 <input type="text" v-model="clientes.identificacion" class="form-control form-control-sm"
-                  id="identificacion" />
+                  placeholder="Campo obligatorio" id="identificacion" />
               </div>
             </div>
             <div class="col-sm-2">
@@ -738,8 +738,8 @@
             </div>
             <div class="col-sm-2">
               <div class="form-outline">
-                <label class="form-label" for="otrocontacto">Otro Teléfono</label>
-                <input type="text" id="otrocontacto" v-model="clientes.otrotelefono"
+                <label class="form-label" for="otrocontacto">Persona Referencia</label>
+                <input type="text" id="otrocontacto" v-model="clientes.otrotelefono" placeholder="Nombre y Telefono"
                   class="form-control form-control-sm" />
               </div>
             </div>
@@ -907,6 +907,25 @@
               <input type="text" v-model="clientes.anteceotros" class="form-control form-control-sm"
                 placeholder="Especifique">
             </div>
+            <br>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <label class="form-label" for="genero">Cicatríz Quirúrgica</label>
+              <select v-model="clientes.cicaquirurgica" class="form-control form-control-sm">
+                <option value="No">No</option>
+                <option value="Queloide">Queloide</option>
+                <option value="Retractil">Retractil</option>
+                <option value="Abierta">Abierta</option>
+                <option value="Con Adherencia">Con Adherencia</option>
+                <option value="Hipertrófica">Hipertrófica</option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <label class="form-label" for="genero">Tratamiento Médico actual</label>              
+              <input type="text" v-model="clientes.tratamedicoactual" class="form-control form-control-sm"
+                placeholder="Especifique">
+            </div>
           </div>
           <br><br>
           <h5 align="center">Antecedentes Familiares</h5>
@@ -1042,28 +1061,7 @@
               </select>
               <input type="text" v-model="clientes.antquirurgicos" class="form-control form-control-sm"
                 placeholder="Especifique">
-            </div><!-- mas campos -->
-            <div class="col-sm-2">
-              <label class="form-label" for="genero">Tratamiento Médico actual</label>
-              <select v-model="clientes.tratamedicoactual" class="form-control form-control-sm">
-                <option value="No">No</option>
-                <option value="Si">Si</option>
-              </select>
-              <input type="text" v-model="clientes.tratamedicoactual" class="form-control form-control-sm"
-                placeholder="Especifique">
-            </div>
-            <div class="col-sm-2">
-              <label class="form-label" for="genero">Cicatríz Quirúrgica</label>
-              <select v-model="clientes.cicaquirurgica" class="form-control form-control-sm">
-                <option value="No">No</option>
-                <option value="Queloide">Queloide</option>
-                <option value="Retractil">Retractil</option>
-                <option value="Abierta">Abierta</option>
-                <option value="Con Adherencia">Con Adherencia</option>
-                <option value="Hipertrófica">Hipertrófica</option>
-
-              </select>
-            </div>
+            </div><!-- mas campos -->            
           </div>
           <br>
           <br>
@@ -2448,7 +2446,7 @@ export default {
       this.modalnuevofisio();
     },
     async activarCliente() {
-      axios.post('api/ventas', this.activacion);
+      axios.post('api/ventasfisio', this.activacion);
       await new Promise(resolve => setTimeout(resolve, 1000));
       this.verpagos(this.clientes.id);
       this.activacion.precio = '';
@@ -2457,7 +2455,7 @@ export default {
     },
 
     async verpagos(id) {
-      const res = await axios.get('api/ventas/' + id);
+      const res = await axios.get('api/ventasfisio/' + id);
       this.ventas = res.data;
       cardpagos.style.display = 'block';
       datosCliente.style.display = 'none';

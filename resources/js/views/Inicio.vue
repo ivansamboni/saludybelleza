@@ -258,20 +258,21 @@
 
           <div class="row">
             <div class="col-sm-2">
-              <label for="nombre" class="form-label"><strong>Nombres</strong></label>
+              <label for="nombre" class="form-label"><strong>Nombres</strong></label><spam style="color:red;">(*)</spam>
 
               <input type="text" v-model="clientes.nombres" id="nombre" class="form-control form-control-sm"
                 placeholder="Campo obligatorio">
             </div>
             <div class="col-sm-2">
-              <label for="nombre" class="form-label"><strong>Apellidos</strong></label>
+              <label for="nombre" class="form-label"><strong>Apellidos</strong></label><spam style="color:red;">(*)</spam>
 
-              <input type="text" v-model="clientes.apellidos" id="apellidos" class="form-control form-control-sm">
+              <input type="text" v-model="clientes.apellidos" id="apellidos" class="form-control form-control-sm" placeholder="Campo obligatorio">
             </div>
 
-            <div class="col-sm-1">
-              <label for="cedula" class="form-label"><strong>T.I</strong></label>
-              <select id="tipo" v-model="clientes.tipodocumento" class="form-control form-control-sm">
+            <div class="col-sm-2">
+              <label for="cedula" class="form-label"><strong>T.I</strong></label><spam style="color:red;">(*)</spam>
+              <select id="tipo" v-model="clientes.tipodocumento" class="form-control form-control-sm" placeholder="Campo obligatorio">
+                <option disabled value="">Seleccione</option>
                 <option value="CC">CC</option>
                 <option value="TI">TI</option>
                 <option value="RC">RC</option>
@@ -280,13 +281,13 @@
             </div>
 
             <div class="col-sm-2">
-              <label for="telefono" class="form-label"><strong>Numero Identificación</strong></label>
+              <label for="telefono" class="form-label"><strong>Numero Identificación</strong></label><spam style="color:red;">(*)</spam>
               <input type="text" v-model="clientes.identificacion" id="identificacion"
-                class="form-control form-control-sm">
+                class="form-control form-control-sm" placeholder="Campo obligatorio">
 
             </div>
 
-            <div class="col-sm-1">
+            <div class="col-sm-2">
               <label for="genero" class="form-label"><strong>Genero</strong></label>
               <select id="genero" v-model="clientes.genero" class="form-control form-control-sm">
 
@@ -324,9 +325,10 @@
               <input type="text" v-model="clientes.telefono" class="form-control form-control-sm" id="telefono">
             </div>
 
-            <div class="col-sm-2">
-              <label for="correo" class="form-label"><strong>Otro Teléfono</strong></label>
-              <input type="text" v-model="clientes.otrotelefono" class="form-control form-control-sm" id="otrotelefono">
+            <div class="col-sm-3">
+              <label for="correo" class="form-label"><strong>Persona Referencia</strong></label>
+              <input type="text" v-model="clientes.otrotelefono" class="form-control form-control-sm" id="otrotelefono"
+               placeholder="Nombre y Telefono">
             </div>
 
             <div class="col-sm-2">

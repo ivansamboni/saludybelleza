@@ -13,18 +13,23 @@
               <router-link to="/home" class="btn btn-outline-dark"><font-awesome-icon icon="fa-solid fa-dumbbell" />
                 Gimnasio</router-link>
             </li>
-            <li class="nav-item">
-              <router-link to="/venta" class="btn btn-outline-dark"><font-awesome-icon
-                  icon="fa-solid fa-money-check-dollar" /> Ventas</router-link>
-            </li>
-
+            
             <li class="nav-item">
               <router-link to="/historiaclinica" class="btn btn-outline-dark"><font-awesome-icon icon="fa-solid fa-folder"
                   size="1x" /> Historia Clinica</router-link>
             </li>
             <li class="nav-item">
               <router-link to="/citas" class="btn btn-outline-dark"><font-awesome-icon icon="fa-solid fa-calendar" />
-                Citas</router-link>
+                Citas Programadas</router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link to="/ventagimnasio" class="btn btn-outline-dark"><font-awesome-icon
+                  icon="fa-solid fa-money-check-dollar" /> Ventas Gimnasio</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/ventafisioterapia" class="btn btn-outline-dark"><font-awesome-icon
+                  icon="fa-solid fa-money-check-dollar" /> Ventas Fisioterapia</router-link>
             </li>
 
           </ul>
