@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -43,6 +42,11 @@ Route::resource('/ventas', App\Http\Controllers\VentaController::class)
 ->only(['index','store','update','show','edit','destroy']);
 
 Route::post('/fechaventas', [App\Http\Controllers\VentaController::class, 'fechventas' ]);
+
+Route::resource('/ventasfisio', App\Http\Controllers\VentafisioController::class)
+->only(['index','store','update','show','edit','destroy']);
+
+Route::post('/fechaventasfisio', [App\Http\Controllers\VentafisioController::class, 'fechventasfisio' ]);
 
 Route::resource('/citas', App\Http\Controllers\CitaController::class)
 ->only(['index','store','update','show','edit','destroy']);

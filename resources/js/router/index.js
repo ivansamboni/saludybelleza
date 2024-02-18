@@ -1,8 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Inicio from '../views/Inicio.vue'
-import Venta from '../views/Venta.vue'
 import Historiaclinica from '../views/Historiaclinica.vue'
 import Cita from '../views/Citas.vue'
+import Ventagim from '../views/Ventagim.vue'
+import Ventasfisio from '../views/Ventasfisio.vue'
+import Observaciones from '../views/Observaciones.vue'
+
+import Ingreso from '../components/historiaclinica/Ingreso.vue'
+import Evolucion from '../components/historiaclinica/Evolucion.vue'
+import Fisioterapia from '../components/historiaclinica/Fisioterapia.vue'
+
 
 
 
@@ -15,12 +22,7 @@ const routes = [
       name: 'inicio',
       component: Inicio
 
-   },
-   {
-      path: '/venta',
-      component: Venta
-
-   },
+   },   
    {
       path: '/historiaclinica',
       component: Historiaclinica
@@ -30,7 +32,37 @@ const routes = [
       path: '/citas',
       component: Cita
 
-   }      
+   },
+   {
+      path: '/ventagimnasio',
+      component: Ventagim
+   },
+   {
+      path: '/ventafisioterapia',
+      component: Ventasfisio
+
+   },
+   {
+      path: '/observaciones',
+      component: Observaciones
+
+   },
+   {
+      path: '/ingreso',
+      component: Ingreso
+
+   },
+   {
+      path: '/evolucion',
+      component: Evolucion
+
+   },
+   {
+      path: '/fisioterapia',
+      component: Fisioterapia
+
+   },            
+   
 ]
 
 export const router = createRouter({

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Venta;
+use App\Models\Ventasfisio;
 
-
-class VentaController extends Controller
+class VentafisioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class VentaController extends Controller
     public function index()
     {
         $fecha = now();
-        $venta = Venta::with('cliente')
+        $ventasfisio = Ventasfisio::with('cliente')
             ->whereDate('created_at', $fecha)->get();
-        return response()->json($venta);
+        return response()->json($ventasfisio);
     }
 
     /**
@@ -31,18 +30,18 @@ class VentaController extends Controller
         //
     }
 
-    public function fechventas(Request $request)
+    public function fechventasfisio(Request $request)
     {
 
         $fecha1 = $request->input('fecha1');
         $fecha2 = $request->input('fecha2');
 
-        $venta = Venta::with('cliente')
+        $ventasfisio = Ventasfisio::with('cliente')
             ->whereBetween('created_at', [$fecha1, $fecha2])
             ->orwhereDate('created_at', [$fecha1, $fecha2])
             ->orderby('created_at', 'asc')
             ->get();
-        return response()->json($venta);
+        return response()->json($ventasfisio);
     }
     /**
      * Store a newly created resource in storage.
@@ -55,8 +54,8 @@ class VentaController extends Controller
         $request->validate([
             'precio' => 'required',
         ]);
-        $venta = Venta::create($request->all());
-        return response()->json($venta);
+        $ventasfisio = Ventasfisio::create($request->all());
+        return response()->json($ventasfisio);
     }
 
     /**
@@ -67,11 +66,10 @@ class VentaController extends Controller
      */
     public function show($id)
     {
-        $registro = Venta::with('cliente')->where('cliente_id', $id)->orderby('created_at', 'desc')->get();
+        $registro = Ventasfisio::with('cliente')->where('cliente_id', $id)->orderby('created_at', 'desc')->get();
 
         return response()->json($registro);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -103,7 +101,7 @@ class VentaController extends Controller
      */
     public function destroy($id)
     {
-        $registro = Venta::find($id);
+        $registro = Ventasfisio::find($id);
         $registro->delete();
     }
 }

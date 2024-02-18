@@ -11,7 +11,7 @@
 
 
     <center>
-        <img src="{{ public_path('img/logo2.jpg') }}" width="100px" alt="">
+        <img src="{{ public_path('img/logo2.jpg') }}" width="70px" alt="">
     </center>
     <br>
     <h2 align="center"><strong>Historia Clinica</strong></h2><br>
@@ -152,6 +152,7 @@
     <strong>Tipo de Estudio</strong> {{ $cliente->estparaclinicos }}
     <strong>Tipo de Estudio</strong> {{ $cliente->escaladolor }}
     <br>
+    <br>
 
     <h7 align="center"><strong>Se Evidencia</strong></h7>
     <p>{{ $cliente->seevidencia }}</p>
@@ -163,6 +164,7 @@
     <!--TABLA HOMBRO-->
     <table class="table">
         <thead>
+        <h3>Fisioterapia</h3>
             <tr>
                 <th>HOMBRO</th>
                 <th></th>
@@ -482,6 +484,7 @@
 
     <table class="table">
         <thead>
+           <h4>Evolución</h4>
             @foreach ($registro as $reg )
             <tr>
                 <th>Titulo</th>
