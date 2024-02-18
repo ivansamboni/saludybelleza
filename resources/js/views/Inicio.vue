@@ -15,42 +15,44 @@
                 data-bs-toggle="dropdown" aria-expanded="false" placeholder="Apellidos..." />
               <ul class="dropdown-menu">
                 <tr v-for="result in results" :key="result.id">
-                  <a class="dropdown-item" href="#" @click="buscarClientevisitante(result.identificacion)">{{
-                    result.nombres
-                  }} {{
-  result.apellidos
-}} </a>
+                  <a class="dropdown-item" href="#" @click="buscarClientevisitante(result.identificacion)">
+                    <h4>{{
+                      result.nombres
+                    }} {{
+                      result.apellidos
+                    }}</h4>
+                  </a>
                 </tr>
               </ul>
             </div>
           </div>
 
-          
-
-            <form @submit.prevent="buscarCliente()" class="d-flex">&nbsp;
-              <input class="dropdown-toggle form-control" required name="bcedula" type="text" v-model="bcedula"
-                placeholder="Cedula">&nbsp;&nbsp;
-              <button class="btn btn-outline-primary" type="submit">
-                <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-              </button>&nbsp;
-            </form>
-
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#regcliente"
-                @click="modalnuevo()">+
-                <font-awesome-icon icon="fa-solid fa-user" /> Nuevo
-              </button>&nbsp;
-              <button type="button" class="btn btn-outline-primary" @click="btnporvencer()">
-                <font-awesome-icon icon="fa-solid fa-clock" /> Por vencer <span
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  {{ cantvencer }}
-                  <span class="visually-hidden">unread messages</span>
-                </span>
 
 
-              </button>&nbsp;
+          <form @submit.prevent="buscarCliente()" class="d-flex">&nbsp;
+            <input class="dropdown-toggle form-control" required name="bcedula" type="text" v-model="bcedula"
+              placeholder="Cedula">&nbsp;&nbsp;
+            <button class="btn btn-outline-primary" type="submit">
+              <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+            </button>&nbsp;
+          </form>
 
-            </div>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#regcliente"
+              @click="modalnuevo()">+
+              <font-awesome-icon icon="fa-solid fa-user" /> Nuevo
+            </button>&nbsp;
+            <button type="button" class="btn btn-outline-primary" @click="btnporvencer()">
+              <font-awesome-icon icon="fa-solid fa-clock" /> Por vencer <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ cantvencer }}
+                <span class="visually-hidden">unread messages</span>
+              </span>
+
+
+            </button>&nbsp;
+
+          </div>
 
         </ul>
 
@@ -85,7 +87,7 @@
 
     </div>
 
-    
+
     <!--Tarjeta información perfil -->
     <div class="col-sm-8">
       <form>
@@ -100,12 +102,13 @@
                     <font-awesome-icon icon="fa-solid fa-pen-to-square" size="sm" /> Editar
                   </button>&nbsp;
 
-                  <button type="button" class="btn btn-outline-dark btn-sm" id="btningresar" style="display:none;">
-                    <font-awesome-icon icon="fa-solid fa-right-to-bracket" /> Ingresa
+                  <button type="button" @click="verpagos(clientes.id)" class="btn btn-outline-dark btn-sm"
+                    data-bs-toggle="modal" data-bs-target="#modverpagos">
+                    <font-awesome-icon icon="fa-solid fa-money-check-dollar" /> Pagos
                   </button>&nbsp;
 
-                  <button type="button" class="btn btn-outline-success btn-sm" id="btnactivo" style="display:block;"
-                    data-bs-toggle="modal" data-bs-target="#modmembresia">
+                  <button type="button" class="btn btn-outline-success btn-sm" id="btnactivo" data-bs-toggle="modal"
+                    data-bs-target="#modmembresia">
                     <font-awesome-icon icon="fa-solid fa-check" />
                     Activar
                   </button>
@@ -162,10 +165,28 @@
 
                 <div class="row">
                   <div class="col-sm-3">
+                    <p class="mb-0"><strong>Persona Referencia</strong></p>
+                  </div>
+                  <div class="col-sm-9">
+                    <h5>{{ clientes.otrotelefono }}</h5>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">
                     <p class="mb-0"><strong>Correo Electrónico</strong></p>
                   </div>
                   <div class="col-sm-9">
                     <h5>{{ clientes.correo }}</h5>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0"><strong>Dirección de Residencia</strong></p>
+                  </div>
+                  <div class="col-sm-9">
+                    <h5>{{ clientes.direccion }}</h5>
                   </div>
                 </div>
 
@@ -258,20 +279,25 @@
 
           <div class="row">
             <div class="col-sm-2">
-              <label for="nombre" class="form-label"><strong>Nombres</strong></label><spam style="color:red;">(*)</spam>
+              <label for="nombre" class="form-label"><strong>Nombres</strong></label>
+              <spam style="color:red;">(*)</spam>
 
               <input type="text" v-model="clientes.nombres" id="nombre" class="form-control form-control-sm"
                 placeholder="Campo obligatorio">
             </div>
             <div class="col-sm-2">
-              <label for="nombre" class="form-label"><strong>Apellidos</strong></label><spam style="color:red;">(*)</spam>
+              <label for="nombre" class="form-label"><strong>Apellidos</strong></label>
+              <spam style="color:red;">(*)</spam>
 
-              <input type="text" v-model="clientes.apellidos" id="apellidos" class="form-control form-control-sm" placeholder="Campo obligatorio">
+              <input type="text" v-model="clientes.apellidos" id="apellidos" class="form-control form-control-sm"
+                placeholder="Campo obligatorio">
             </div>
 
             <div class="col-sm-2">
-              <label for="cedula" class="form-label"><strong>T.I</strong></label><spam style="color:red;">(*)</spam>
-              <select id="tipo" v-model="clientes.tipodocumento" class="form-control form-control-sm" placeholder="Campo obligatorio">
+              <label for="cedula" class="form-label"><strong>T.I</strong></label>
+              <spam style="color:red;">(*)</spam>
+              <select id="tipo" v-model="clientes.tipodocumento" class="form-control form-control-sm"
+                placeholder="Campo obligatorio">
                 <option disabled value="">Seleccione</option>
                 <option value="CC">CC</option>
                 <option value="TI">TI</option>
@@ -281,7 +307,8 @@
             </div>
 
             <div class="col-sm-2">
-              <label for="telefono" class="form-label"><strong>Numero Identificación</strong></label><spam style="color:red;">(*)</spam>
+              <label for="telefono" class="form-label"><strong>Numero Identificación</strong></label>
+              <spam style="color:red;">(*)</spam>
               <input type="text" v-model="clientes.identificacion" id="identificacion"
                 class="form-control form-control-sm" placeholder="Campo obligatorio">
 
@@ -328,7 +355,7 @@
             <div class="col-sm-3">
               <label for="correo" class="form-label"><strong>Persona Referencia</strong></label>
               <input type="text" v-model="clientes.otrotelefono" class="form-control form-control-sm" id="otrotelefono"
-               placeholder="Nombre y Telefono">
+                placeholder="Nombre y Telefono">
             </div>
 
             <div class="col-sm-2">
@@ -407,19 +434,62 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal ver pagos-->
+  <div class="modal fade" id="modverpagos" tabindex="-1" aria-labelledby="modverpagos" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="text-center" id="modverpagos">Pagos Realizados: <strong> {{ clientes.nombres }} {{ clientes.apellidos
+          }} </strong></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col">Precio</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Fecha de Venta</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="ven in ventas" :key="ven.id">
+                <td>${{ numberWithCommas(ven.precio) }}</td>
+                <td>{{ ven.tipoventa }}</td>
+                <td>{{ moment(ven.created_at).format("DD/MM/YYYY hh:mm a") }}</td>
+              </tr><br>
+
+            </tbody>
+          </table>
+          <h3>Total: <string style="color:green;">${{ numberWithCommas(total) }}</string>
+          </h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="myButton2" data-bs-dismiss="modal">Cerrar</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import {crearCliente,numberWithCommas,getEdad} from '../helpers/Functions.js'
+import useUseridStore from '@/stores/userid.js'
+import { crearCliente, numberWithCommas, getEdad } from '../helpers/Functions.js'
 import moment from "moment";
 export default {
 
   data() {
+    const useridStore = useUseridStore()
     return {
+      useridStore: useridStore,
       moment: moment,
       diasrestantes: '',
       edadactual: '',
-      bcedula: '',
+      bcedula: useridStore.cedula,
       apellido: '',
       minLength: 3,
       cantvisita: '',
@@ -441,19 +511,24 @@ export default {
       visitanteshoy: [],
       results: [],
       membresiaslist: [],
-      historiaclinica: []
+      historiaclinica: [],
+      ventas: []
 
     }
   },
 
   computed: {
+
+    total() {
+      return this.ventas.reduce((total, ven) => total + ven.precio, 0);
+    },
     color() {
       return { 'text-danger': this.clientes.estadoactivo === new Date() }
     },
   },
   mounted() {
     this.visitantes();
-    this.search();
+    this.buscarCliente(this.bcedula);
   },
 
   created() {
@@ -461,7 +536,7 @@ export default {
     this.porvencer();
   },
 
-  methods: {    
+  methods: {
     crearCliente,
     numberWithCommas,
     getEdad,
@@ -493,6 +568,7 @@ export default {
       this.clientes.nombres = '';
       this.clientes.apellidos = '';
       this.clientes.identificacion = '';
+      this.useridStore.cedula = '';
       this.clientes.genero = '';
       this.clientes.estadocivil = '';
       this.clientes.estadoactivo = '';
@@ -514,7 +590,7 @@ export default {
 
     },
 
-    
+
     async activarCliente() {
       let confirmac = confirm('Activar este cliente?');
       if (confirmac) {
@@ -529,9 +605,14 @@ export default {
     },
 
     async actualizarCliente() {
-      const res = await axios.put('api/clientes/' + this.clientes.id, this.clientes);
-      alert('Se actualizó con éxito');
-     },
+      const res = await axios.put('api/clientes/' + this.clientes.id, this.clientes)
+        .then(function (response) {
+          alert('Cliente Actualizado con Éxito')
+        })
+        .catch(function (error) {
+          alert('Error los campos "Nombres, Apellidos y Cedula son Obligatorios"  o la identificación o el email ya están registrados');
+        });
+    },
 
     async eliminarCliente(id) {
       let confirmac = confirm('Eliminar este cliente?');
@@ -555,7 +636,6 @@ export default {
       btncrear.hidden = true;
       this.titulomodal = 'Modificar Datos';
       const res = await axios.get('api/clientes/' + this.bcedula);
-      btningresar.disabled = false;
       datosCliente.style.display = 'block';
       this.activacion.cliente_id = res.data.id;
       this.clientes.id = res.data.id;
@@ -564,6 +644,7 @@ export default {
       this.clientes.estadoactivo = res.data.estadoactivo;
       this.clientes.tipodocumento = res.data.tipodocumento;
       this.clientes.identificacion = res.data.identificacion;
+      this.useridStore.cedula = res.data.identificacion;
       this.clientes.genero = res.data.genero;
       this.clientes.estadocivil = res.data.estadocivil;
       this.clientes.edad = res.data.edad;
@@ -622,7 +703,6 @@ export default {
       btncrear.hidden = true;
       this.titulomodal = 'Modificar Datos';
       const res = await axios.get('api/clientes/' + identificacion);
-      btningresar.disabled = false;
       datosCliente.style.display = 'block';
       this.activacion.cliente_id = res.data.id;
       this.clientes.id = res.data.id;
@@ -632,6 +712,7 @@ export default {
       this.clientes.estadoactivo = res.data.estadoactivo;
       this.clientes.tipodocumento = res.data.tipodocumento;
       this.clientes.identificacion = res.data.identificacion;
+      this.useridStore.cedula = res.data.identificacion;
       this.clientes.genero = res.data.genero;
       this.clientes.estadocivil = res.data.estadocivil;
       this.clientes.edad = res.data.edad;
@@ -652,8 +733,12 @@ export default {
       const res = await axios.get('api/membresias');
       this.membresiaslist = res.data;
     },
-
-  },
+    async verpagos(id) {
+      const res = await axios.get('api/ventas/' + id);
+      this.ventas = res.data;
+      console.log(res.data)
+    }
+  }
 
 }
 </script>

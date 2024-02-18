@@ -101,6 +101,7 @@ class VentafisioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $registro = Ventasfisio::find($id);
+        $registro->delete();
     }
 }

@@ -27,6 +27,7 @@
               <th scope="col">Precio</th>
               <th scope="col">Descripción</th>
               <th scope="col">Fecha de Venta</th>
+              <th scope="col">Eliminar</th>
             </tr>
           </thead>
           <tbody>
@@ -35,6 +36,7 @@
               <td>${{ numberWithCommas(ven.precio) }}</td>
               <td>{{ ven.tipoventa }}</td>
               <td>{{ moment(ven.created_at).format("DD/MM/YYYY hh:mm a") }}</td>
+              <td><button class="btn btn-danger" @click="pagoEliminar(ven.id)">X</button></td>
             </tr><br>
             <h5>Total: <string style="color:green;">${{ numberWithCommas(total) }}</string>
             </h5>&nbsp;
@@ -60,7 +62,7 @@
           <spam style="color:red;">(*)</spam>
           <div class="dropdown">
             <input type="text" name="name" class="dropdown-toggle form-control" v-model="apellido" @input="search"
-              data-bs-toggle="dropdown" aria-expanded="false" placeholder="Apellidos,Nombres o Identificación..." />
+              data-bs-toggle="dropdown" aria-expanded="false" placeholder="Apellidos,Nombres o Identificación..." autocomplete="off"/>
 
             <ul class="dropdown-menu">
               <tr v-for="          result           in           results          " :key="result.id">
@@ -153,15 +155,21 @@ export default {
     },
 
     async activarCliente() {
-      axios.post('api/ventas', this.activacion);
+      axios.post('api/ventas', this.activacion)
+      .then(function (response) {
+      alert('Pago Registrado con Éxito')
+    })
+    .catch(function (error) {
+      alert('Error Ningún Campo Debe Ir Vacío');
+    });
       this.activacion.precio = '';
       this.activacion.tipoventa = '';
-      this.activacion.cliente_id = res.data.id;
+      this.activacion.cliente_id = '';
       this.nombrecliente ='';
       this.apellidocliente = '';
       this.apellido = '';
-
     },
+
     async search() {
 
       if (this.apellido.length >= 3) {
@@ -177,7 +185,16 @@ export default {
       this.nombrecliente = res.data.nombres;
       this.apellidocliente = res.data.apellidos;
 
-    }
+    },
+
+    async pagoEliminar(id) {
+      let confirmac = confirm('Eliminar este registro?');
+      if (confirmac) {
+        const res = await axios.delete('api/ventas/' + id);
+      }
+      this.consultaVenta();
+     }
   }
+
 }
 </script>

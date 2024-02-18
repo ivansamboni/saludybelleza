@@ -31,6 +31,14 @@
               <router-link to="/ventafisioterapia" class="btn btn-outline-dark"><font-awesome-icon
                   icon="fa-solid fa-money-check-dollar" /> Ventas Fisioterapia</router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/observaciones" class="btn btn-outline-dark"><font-awesome-icon
+                  icon="fa-solid fa-money-check-dollar" /> Observaciones</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link to="/ingreso" class="btn btn-outline-dark"><font-awesome-icon
+                  icon="fa-solid fa-money-check-dollar" /> ingreso</router-link>
+            </li>
 
           </ul>
         </div>
@@ -38,10 +46,6 @@
     </nav>
     <router-view />
   </main>
-
-  
-<Venta />
-
 
 </template>
 <script>

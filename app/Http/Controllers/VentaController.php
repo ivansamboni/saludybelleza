@@ -103,6 +103,7 @@ class VentaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $registro = Venta::find($id);
+        $registro->delete();
     }
 }
